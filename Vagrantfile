@@ -79,5 +79,7 @@ Vagrant.configure(2) do |config|
     sudo aptitude update
     #sudo aptitude upgrade -y
     sudo aptitude install -y docker.io vim vim-syntax-docker screen htop git
+    # install docker couchdb
+    sudo docker pull klaemo/couchdb
   SHELL
 end
