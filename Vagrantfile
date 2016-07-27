@@ -78,8 +78,11 @@ Vagrant.configure(2) do |config|
     echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
     sudo aptitude update
     #sudo aptitude upgrade -y
-    sudo aptitude install -y docker.io vim vim-syntax-docker screen htop git
+    sudo aptitude install -y docker.io vim vim-syntax-docker screen htop git nodejs npm
     # install docker couchdb
     sudo docker pull klaemo/couchdb
+    # fix nodejs
+    cd /usr/bin
+    sudo ln -s nodejs node
   SHELL
 end
