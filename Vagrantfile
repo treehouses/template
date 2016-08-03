@@ -76,9 +76,10 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
-    sudo aptitude update
-    #sudo aptitude upgrade -y
-    sudo aptitude install -y docker.io vim vim-syntax-docker screen htop git nodejs npm
+    echo grub-pc hold | dpkg --set-selections
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y docker.io vim vim-syntax-docker screen htop git nodejs npm
     # install docker couchdb
     sudo docker pull klaemo/couchdb
     # fix nodejs

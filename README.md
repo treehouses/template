@@ -5,7 +5,7 @@ vagrant up
 
 vagrant ssh
 
-sudo aptitude upgrade
+#sudo apt upgrade
 #grup-pc | first option | no install on drives
 
 sudo apt-get clean
