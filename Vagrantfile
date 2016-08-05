@@ -85,6 +85,8 @@ Vagrant.configure(2) do |config|
     # fix nodejs
     cd /usr/bin
     sudo ln -s nodejs node
+    # change password for vagrant user
+    echo -e "tnargav\ntnargav" | sudo passwd vagrant
     # prepare for packaging
     sudo apt-get clean
     sudo dd if=/dev/zero of=/EMPTY bs=1M
