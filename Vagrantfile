@@ -85,5 +85,10 @@ Vagrant.configure(2) do |config|
     # fix nodejs
     cd /usr/bin
     sudo ln -s nodejs node
+    # prepare for packaging
+    sudo apt-get clean
+    sudo dd if=/dev/zero of=/EMPTY bs=1M
+    sudo rm -f /EMPTY
+    cat /dev/null > ~/.bash_history && history -c && exit
   SHELL
 end
