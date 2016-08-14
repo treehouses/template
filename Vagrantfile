@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
     echo grub-pc hold | dpkg --set-selections
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io vim vim-syntax-docker screen htop git nodejs npm
+    sudo apt install -y docker.io vim vim-syntax-docker screen htop git nodejs npm autossh
     # install docker couchdb
     sudo docker pull klaemo/couchdb
     # fix nodejs
