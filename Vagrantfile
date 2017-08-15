@@ -77,16 +77,20 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # adding backports
     echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
+    # blacklist grub-pc from upgrades
+    echo grub-pc hold | dpkg --set-selections
+    # finally new first ;)
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y vim vim-syntax-docker screen htop git nodejs npm autossh apt-transport-https ca-certificates curl gnupg2 software-properties-common
     # adding official docker apt server
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
     apt-key fingerprint 0EBFCD88
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-    # blacklist grub-pc from upgrades
-    echo grub-pc hold | dpkg --set-selections
-    # finally new ;)
+    # finally new second ;)
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim vim-syntax-docker screen htop git nodejs npm autossh apt-transport-https ca-certificates curl gnupg2 software-properties-common docker-ce
+    sudo apt install -y docker-ce
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker couchdb
