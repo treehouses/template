@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "debian/jessie64"
-  config.vm.box_version = "8.2.1"
+  config.vm.box = "debian/contrib-jessie64"
+  config.vm.box_version = "8.8.0"
 
   config.vm.hostname = "template"
 
@@ -75,13 +75,22 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
+    # adding backports
     echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
+    # adding official docker apt server
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+    apt-key fingerprint 0EBFCD88
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    # blacklist grub-pc from upgrades
     echo grub-pc hold | dpkg --set-selections
+    # finally new ;)
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker.io vim vim-syntax-docker screen htop git nodejs npm autossh
+    sudo apt install -y vim vim-syntax-docker screen htop git nodejs npm autossh apt-transport-https ca-certificates curl gnupg2 software-properties-common docker-ce
+    sudo usermod -aG docker $USER
+    sudo usermod -aG docker vagrant
     # install docker couchdb
-    sudo docker pull klaemo/couchdb
+    sudo docker pull klaemo/couchdb:1.6.1
     # fix nodejs
     cd /usr/bin
     sudo ln -s nodejs node
