@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-    add-apt-repository "deb https://deb.nodesource.com/node_8.x jessie main"
+    add-apt-repository "deb https://deb.nodesource.com/node_6.x jessie main"
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
