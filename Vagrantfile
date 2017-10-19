@@ -79,25 +79,25 @@ Vagrant.configure(2) do |config|
     echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
     # blacklist grub-pc from upgrades
     echo grub-pc hold | dpkg --set-selections
-    # finally new first ;)
+    # install important packages
     sudo apt update
-    sudo apt upgrade -y
-    sudo apt install -y vim vim-syntax-docker screen htop git nodejs npm autossh apt-transport-https ca-certificates curl gnupg2 software-properties-common
-    # adding official docker apt server
+    sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+    # adding official docker/chrome/nodesource apt servers
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-    apt-key fingerprint 0EBFCD88
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-    # finally new second ;)
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
+    add-apt-repository "deb https://deb.nodesource.com/node_8.x jessie main"
+    # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y docker-ce
+    sudo apt install -y vim vim-syntax-docker screen htop git autossh docker-ce google-chrome-stable nodejs
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
-    # install docker couchdb
-    sudo docker pull klaemo/couchdb:1.6.1
-    # fix nodejs
-    cd /usr/bin
-    sudo ln -s nodejs node
+    sudo rm /etc/apt/sources.list.d/google-chrome.list
+    # install docker couchdb 2.0
+    sudo docker pull klaemo/couchdb:2.0.0
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
