@@ -4,7 +4,7 @@ How to create vagrant boxes
 export VAGRANT_SERVER_URL=https://app.vagrantup.com
 vagrant login
 
-vagrant up
+vagrant up |& tee template.log
 vagrant halt
-vagrant package --output ole-0.2.2.box
+vagrant package --output ole-0.3.0.box
 ```

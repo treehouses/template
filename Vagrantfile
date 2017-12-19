@@ -12,8 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "debian/contrib-jessie64"
-  config.vm.box_version = "8.8.0"
+  config.vm.box = "debian/contrib-stretch64"
+  config.vm.box_version = "9.2.0"
 
   config.vm.hostname = "template"
 
@@ -68,7 +68,7 @@ Vagrant.configure(2) do |config|
   # such as FTP and Heroku are also available. See the documentation at
   # https://docs.vagrantup.com/v2/push/atlas.html for more information.
   config.push.define "atlas" do |push|
-    push.app = "ole/jessie64"
+    push.app = "ole/stretch64"
   end
 
   # Enable provisioning with a shell script. Additional provisioners such as
@@ -76,7 +76,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     # adding backports
-    echo "deb http://ftp.de.debian.org/debian jessie-backports main" | sudo tee -a /etc/apt/sources.list
+    echo "deb http://ftp.de.debian.org/debian stretch-backports main" | sudo tee -a /etc/apt/sources.list
     # blacklist grub-pc from upgrades
     echo grub-pc hold | dpkg --set-selections
     # install important packages
@@ -88,14 +88,13 @@ Vagrant.configure(2) do |config|
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-    add-apt-repository "deb https://deb.nodesource.com/node_6.x jessie main"
+    add-apt-repository "deb https://deb.nodesource.com/node_6.x stretch main"
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim vim-syntax-docker screen htop git autossh docker-ce google-chrome-stable nodejs
+    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
-    sudo rm /etc/apt/sources.list.d/google-chrome.list
     # install docker couchdb 2.0
     sudo docker pull klaemo/couchdb:2.0.0
     # change password for vagrant user
