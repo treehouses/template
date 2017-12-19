@@ -71,6 +71,9 @@ Vagrant.configure(2) do |config|
     push.app = "ole/stretch64"
   end
 
+  # Prevent TTY Errors (copied from laravel/homestead: "homestead.rb" file)... By default this is "bash -l".
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -86,13 +89,13 @@ Vagrant.configure(2) do |config|
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
+    echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
     add-apt-repository "deb https://deb.nodesource.com/node_6.x stretch main"
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq
+    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker couchdb 2.0
