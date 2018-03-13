@@ -2,6 +2,7 @@ How to create vagrant boxes
 
 ```sh
 vagrant login
+vagrant destroy -f
 
 vagrant up |& tee template.log
 vagrant halt
