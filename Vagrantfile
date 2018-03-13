@@ -99,7 +99,7 @@ Vagrant.configure(2) do |config|
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker couchdb 2.1.1
-    sudo docker pull klaemo/couchdb:2.1.1
+    sudo docker pull couchdb:2.1.1
     # Install Angular CLI
     sudo npm install -g @angular/cli
     # Add CORS to CouchDB so app has access to databases
