@@ -98,8 +98,8 @@ Vagrant.configure(2) do |config|
     sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
-    # install docker couchdb 2.0
-    sudo docker pull klaemo/couchdb:2.0.0
+    # install docker couchdb 2.1.1
+    sudo docker pull klaemo/couchdb:2.1.1
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
