@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/contrib-stretch64"
-  config.vm.box_version = "9.2.0"
+  config.vm.box_version = "9.4.0"
 
   config.vm.hostname = "template"
 
@@ -98,8 +98,15 @@ Vagrant.configure(2) do |config|
     sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
-    # install docker couchdb 2.0
-    sudo docker pull klaemo/couchdb:2.0.0
+    # install docker couchdb 2.1.1
+    sudo docker pull klaemo/couchdb:2.1.1
+    # Install Angular CLI
+    sudo npm install -g @angular/cli
+    # Add CORS to CouchDB so app has access to databases
+    git clone https://github.com/pouchdb/add-cors-to-couchdb.git
+    cd add-cors-to-couchdb
+    npm install
+    cd ..
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
