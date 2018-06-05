@@ -91,15 +91,16 @@ Vagrant.configure(2) do |config|
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-    add-apt-repository "deb https://deb.nodesource.com/node_6.x stretch main"
+    add-apt-repository "deb https://deb.nodesource.com/node_8.x stretch main"
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
     sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
+    # FIXME docker-compose
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker couchdb 2.1.1
-    sudo docker pull couchdb:2.1.1
+    sudo docker pull treehouses/couchdb:2.1.1
     # Install Angular CLI
     sudo npm install -g @angular/cli
     # Add CORS to CouchDB so app has access to databases
