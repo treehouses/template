@@ -96,9 +96,11 @@ Vagrant.configure(2) do |config|
     sudo apt update
     sudo apt upgrade -y
     sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
-    # FIXME docker-compose
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
+    # install docker-compose
+    sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
     # install docker couchdb 2.1.1
     sudo docker pull treehouses/couchdb:2.1.1
     # Install Angular CLI
