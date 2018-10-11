@@ -101,8 +101,8 @@ Vagrant.configure(2) do |config|
     # install docker-compose
     sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
-    # install docker couchdb 2.1.1
-    sudo docker pull treehouses/couchdb:2.1.1
+    # install docker couchdb 2.2.0
+    sudo docker pull treehouses/couchdb:2.2.0
     # Install Angular CLI
     sudo npm install -g @angular/cli
     # Add CORS to CouchDB so app has access to databases
