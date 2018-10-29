@@ -103,7 +103,12 @@ Vagrant.configure(2) do |config|
     sudo chmod +x /usr/local/bin/docker-compose
     # install docker couchdb 2.2.0
     sudo docker pull treehouses/couchdb:2.2.0
-    # Install Angular CLI
+    # install docker planet latest
+    sudo docker pull treehouses/planet:latest
+    sudo docker pull treehouses/planet:db-init
+    sudo docker tag treehouses/planet:latest treehouses/planet:local
+    sudo docker tag treehouses/planet:db-init treehouses/planet:db-init-local
+    # install Angular CLI
     sudo npm install -g @angular/cli
     # Add CORS to CouchDB so app has access to databases
     git clone https://github.com/pouchdb/add-cors-to-couchdb.git
