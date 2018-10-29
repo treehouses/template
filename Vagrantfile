@@ -110,6 +110,18 @@ Vagrant.configure(2) do |config|
     cd add-cors-to-couchdb
     npm install
     cd ..
+
+    # plant
+    wget https://github.com/open-learning-exchange/planet/blob/master/package.json
+    echo "Preparing local node_modules folder…"
+    mkdir -p /vagrant_node_modules
+    mkdir -p node_modules
+    chown vagrant:vagrant /vagrant_node_modules
+    mount --bind /vagrant_node_modules node_modules
+    npm i --unsafe-perm
+    sudo npm run webdriver-set-version
+    umount /vagrant_node_modules
+
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
