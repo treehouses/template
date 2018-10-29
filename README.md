@@ -1,7 +1,7 @@
 How to create vagrant boxes
 
 ```sh
-vagrant login
+vagrant cloud auth login
 vagrant destroy -f
 
 vagrant up |& tee template.log
