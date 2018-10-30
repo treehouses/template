@@ -122,6 +122,7 @@ Vagrant.configure(2) do |config|
     npm i --unsafe-perm
     sudo npm run webdriver-set-version
     mv node_modules /vagrant_node_modules
+    chown vagrant:vagrant /vagrant_node_modules
     rm package.json
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
