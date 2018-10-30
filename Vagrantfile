@@ -53,13 +53,14 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  #config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1234"
-  #end
+     vb.memory = "3333"
+     vb.cpus = "3"
+  end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -110,19 +111,12 @@ Vagrant.configure(2) do |config|
     cd add-cors-to-couchdb
     npm install
     cd ..
-
     # plant
-    wget https://github.com/open-learning-exchange/planet/blob/master/package.json
-    echo "Preparing local node_modules folder…"
-    mkdir -p /vagrant_node_modules
-    mkdir -p node_modules
-    chown vagrant:vagrant /vagrant_node_modules
-    mount --bind /vagrant_node_modules node_modules
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
     sudo npm run webdriver-set-version
-    umount /vagrant_node_modules
+    mv node_modules /vagrant_node_modules
     rm package.json
-
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
