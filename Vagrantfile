@@ -110,6 +110,9 @@ Vagrant.configure(2) do |config|
     sudo docker pull treehouses/planet:db-init
     sudo docker tag treehouses/planet:latest treehouses/planet:local
     sudo docker tag treehouses/planet:db-init treehouses/planet:db-init-local
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
     # install Angular CLI
     sudo npm install -g @angular/cli
     # Add CORS to CouchDB so app has access to databases
