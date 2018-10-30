@@ -106,10 +106,10 @@ Vagrant.configure(2) do |config|
     # install docker couchdb 2.2.0
     sudo docker pull treehouses/couchdb:2.2.0
     # install docker planet latest
-    sudo docker pull treehouses/planet:latest
-    sudo docker pull treehouses/planet:db-init
-    sudo docker tag treehouses/planet:latest treehouses/planet:local
-    sudo docker tag treehouses/planet:db-init treehouses/planet:db-init-local
+    sudo docker pull treehouses/planet:0.5.7
+    sudo docker pull treehouses/planet:db-init-0.5.7
+    sudo docker tag treehouses/planet:0.5.7 treehouses/planet:local
+    sudo docker tag treehouses/planet:db-init-0.5.7 treehouses/planet:db-init-local
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
