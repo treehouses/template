@@ -9,4 +9,4 @@ vagrant halt
 vagrant package --output ole-0.5.1.box
 ```
 
-then the new box to https://app.vagrantup.com/ole/boxes/stretch64
+upload the new box to https://app.vagrantup.com/ole/boxes/stretch64
