@@ -80,9 +80,10 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     # adding backports
-    echo "deb http://ftp.de.debian.org/debian stretch-backports main" | sudo tee -a /etc/apt/sources.list
-    # blacklist grub-pc from upgrades
+    echo "deb http://ftp.de.debian.org/debian stretch-backports main non-free" | sudo tee -a /etc/apt/sources.list
+    # blacklist grub-pc and linux-image-amd64 from upgrades
     echo grub-pc hold | dpkg --set-selections
+    echo linux-image-amd64 hold | dpkg --set-selections
     # install important packages
     sudo apt update
     sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
