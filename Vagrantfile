@@ -103,13 +103,20 @@ Vagrant.configure(2) do |config|
     # install docker-compose
     sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
+    # blacklist virtualbox-guest-* from upgrades
+    echo virtualbox-guest-dkms hold | dpkg --set-selections
+    echo virtualbox-guest-utils hold | dpkg --set-selections
     # install docker couchdb 2.2.0
     sudo docker pull treehouses/couchdb:2.2.0
     # install docker planet latest
-    sudo docker pull treehouses/planet:0.5.7
-    sudo docker pull treehouses/planet:db-init-0.5.7
-    sudo docker tag treehouses/planet:0.5.7 treehouses/planet:local
-    sudo docker tag treehouses/planet:db-init-0.5.7 treehouses/planet:db-init-local
+    #sudo docker pull treehouses/planet:0.6.3
+    #sudo docker pull treehouses/planet:db-init-0.6.3
+    #sudo docker tag treehouses/planet:0.6.3 treehouses/planet:local
+    #sudo docker tag treehouses/planet:db-init-0.6.3 treehouses/planet:db-init-local
+    sudo docker pull treehouses/planet-tags:0.6.2-angular7-cc34684a
+    sudo docker pull treehouses/planet-tags:db-init-0.6.2-angular7-cc34684a
+    sudo docker tag treehouses/planet-tags:0.6.2-angular7-cc34684a treehouses/planet:local
+    sudo docker tag treehouses/planet-tags:db-init-0.6.2-angular7-cc34684a treehouses/planet:db-init-local
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
@@ -121,7 +128,8 @@ Vagrant.configure(2) do |config|
     npm install
     cd ..
     # plant
-    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
+    #wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/angular7/package.json
     npm i --unsafe-perm
     sudo npm run webdriver-set-version
     mv node_modules /vagrant_node_modules
