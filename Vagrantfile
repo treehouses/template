@@ -1,17 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# All Vagrant configuration is done below. The "2" in Vagrant.configure
-# configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-# you're doing.
 Vagrant.configure(2) do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
-
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "debian/contrib-stretch64"
   config.vm.box_version = "9.5.0"
 
@@ -24,50 +14,11 @@ Vagrant.configure(2) do |config|
     vb.name = "template"
   end
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
   config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
      vb.memory = "3333"
      vb.cpus = "3"
   end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
   config.push.define "atlas" do |push|
     push.app = "ole/stretch64"
   end
@@ -75,9 +26,6 @@ Vagrant.configure(2) do |config|
   # Prevent TTY Errors (copied from laravel/homestead: "homestead.rb" file)... By default this is "bash -l".
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     # adding backports
     echo "deb http://ftp.de.debian.org/debian stretch-backports main non-free" | sudo tee -a /etc/apt/sources.list
@@ -109,14 +57,10 @@ Vagrant.configure(2) do |config|
     # install docker couchdb 2.2.0
     sudo docker pull treehouses/couchdb:2.2.0
     # install docker planet latest
-    #sudo docker pull treehouses/planet:0.6.3
-    #sudo docker pull treehouses/planet:db-init-0.6.3
-    #sudo docker tag treehouses/planet:0.6.3 treehouses/planet:local
-    #sudo docker tag treehouses/planet:db-init-0.6.3 treehouses/planet:db-init-local
-    sudo docker pull treehouses/planet-tags:0.6.2-angular7-cc34684a
-    sudo docker pull treehouses/planet-tags:db-init-0.6.2-angular7-cc34684a
-    sudo docker tag treehouses/planet-tags:0.6.2-angular7-cc34684a treehouses/planet:local
-    sudo docker tag treehouses/planet-tags:db-init-0.6.2-angular7-cc34684a treehouses/planet:db-init-local
+    sudo docker pull treehouses/planet:0.7.2
+    sudo docker pull treehouses/planet:db-init-0.7.2
+    sudo docker tag treehouses/planet:0.7.2 treehouses/planet:local
+    sudo docker tag treehouses/planet:db-init-0.7.2 treehouses/planet:db-init-local
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
@@ -128,8 +72,7 @@ Vagrant.configure(2) do |config|
     npm install
     cd ..
     # plant
-    #wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
-    wget https://raw.githubusercontent.com/open-learning-exchange/planet/angular7/package.json
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
     sudo npm run webdriver-set-version
     mv node_modules /vagrant_node_modules
