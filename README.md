@@ -7,7 +7,7 @@ rm template.log
 
 vagrant up |& tee template.log
 vagrant halt
-vagrant package --output ole-0.6.0.box
+vagrant package --output ole-0.6.1.box
 ```
 
 upload the new box to https://app.vagrantup.com/ole/boxes/stretch64
