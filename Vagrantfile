@@ -128,8 +128,7 @@ Vagrant.configure(2) do |config|
     npm install
     cd ..
     # plant
-    #wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
-    wget https://raw.githubusercontent.com/open-learning-exchange/planet/angular7/package.json
+    wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
     sudo npm run webdriver-set-version
     mv node_modules /vagrant_node_modules
