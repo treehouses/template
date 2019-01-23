@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude
+    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker-compose
@@ -65,8 +65,8 @@ Vagrant.configure(2) do |config|
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
-    # install Angular CLI
-    sudo npm install -g @angular/cli
+    # install CLI's
+    sudo npm install -g @angular/cli @treehouses/cli
     # Add CORS to CouchDB so app has access to databases
     git clone https://github.com/pouchdb/add-cors-to-couchdb.git
     cd add-cors-to-couchdb
