@@ -81,6 +81,7 @@ Vagrant.configure(2) do |config|
     rm package.json
     # sshkeys
     function sshkeyadd {
+      echo "# $1" >> /home/vagrant/.ssh/authorized_keys
       curl https://github.com/"$1".keys >> /home/vagrant/.ssh/authorized_keys
     }
     sshkeyadd dogi
@@ -97,6 +98,9 @@ Vagrant.configure(2) do |config|
     sshkeyadd rrijal53
     sshkeyadd inDepthh
     sshkeyadd Sriharsha-Singam
+    sync;sync;sync
+    cp -r /home/vagrant/.ssh /root/.
+    sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
