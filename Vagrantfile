@@ -79,6 +79,24 @@ Vagrant.configure(2) do |config|
     mv node_modules /vagrant_node_modules
     chown vagrant:vagrant /vagrant_node_modules
     rm package.json
+    # sshkeys
+    function sshkeyadd {
+      curl https://github.com/"$1".keys >> /home/vagrant/.ssh/authorized_keys
+    }
+    sshkeyadd dogi
+    sshkeyadd i5o
+    sshkeyadd paulbert
+    sshkeyadd lmmrssa
+    sshkeyadd empeje
+    sshkeyadd sente
+    sshkeyadd singarpita
+    sshkeyadd svlesiv
+    sshkeyadd yuviii
+    sshkeyadd BhargaviNadendla
+    sshkeyadd leahphuong
+    sshkeyadd rrijal53
+    sshkeyadd inDepthh
+    sshkeyadd Sriharsha-Singam
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
     # prepare for packaging
