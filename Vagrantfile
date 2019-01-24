@@ -100,6 +100,7 @@ Vagrant.configure(2) do |config|
     sshkeyadd Sriharsha-Singam
     sync;sync;sync
     cp -r /home/vagrant/.ssh /root/.
+    echo "0.6.5" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
