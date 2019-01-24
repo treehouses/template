@@ -90,7 +90,7 @@ Vagrant.configure(2) do |config|
     sshkeyadd lmmrssa
     sshkeyadd empeje
     sshkeyadd sente
-    sshkeyadd singarpita
+    sshkeyadd singharpita
     sshkeyadd svlesiv
     sshkeyadd yuviii
     sshkeyadd BhargaviNadendla
