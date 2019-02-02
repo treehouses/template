@@ -98,8 +98,13 @@ Vagrant.configure(2) do |config|
     sshkeyadd rrijal53
     sshkeyadd inDepthh
     sshkeyadd Sriharsha-Singam
+    sshkeyadd jazdao
     sync;sync;sync
     cp -r /home/vagrant/.ssh /root/.
+    {
+       echo "Host *.onion"
+       echo "  ProxyCommand nc -x localhost:9150 -X 5 %h %p"
+    } > /root/.ssh/config
     echo "0.6.5" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
