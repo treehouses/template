@@ -107,7 +107,8 @@ Vagrant.configure(2) do |config|
        echo "Host *.onion"
        echo "  ProxyCommand nc -x localhost:9150 -X 5 %h %p"
     } > /root/.ssh/config
-    echo "0.6.5" > /boot/version.txt
+    v=$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box")
+    echo "${v:0:-4}" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
