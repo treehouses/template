@@ -106,7 +106,7 @@ Vagrant.configure(2) do |config|
     cp -r /home/vagrant/.ssh /root/.
     {
        echo "Host *.onion"
-       echo "  ProxyCommand nc -x localhost:9150 -X 5 %h %p"
+       echo "  ProxyCommand nc -x localhost:9050 -X 5 %h %p"
     } > /root/.ssh/config
     v=$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box")
     echo "${v:0:-4}" > /boot/version.txt
