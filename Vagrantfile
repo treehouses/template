@@ -58,10 +58,10 @@ Vagrant.configure(2) do |config|
     sudo docker pull treehouses/couchdb:2.2.0
     sudo docker pull treehouses/couchdb:2.3.0
     # install docker planet latest
-    sudo docker pull treehouses/planet:0.7.2
-    sudo docker pull treehouses/planet:db-init-0.7.2
-    sudo docker tag treehouses/planet:0.7.2 treehouses/planet:local
-    sudo docker tag treehouses/planet:db-init-0.7.2 treehouses/planet:db-init-local
+    sudo docker pull treehouses/planet:latest
+    sudo docker pull treehouses/planet:db-init
+    sudo docker tag treehouses/planet:latest treehouses/planet:local
+    sudo docker tag treehouses/planet:db-init treehouses/planet:db-init-local
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
@@ -101,13 +101,14 @@ Vagrant.configure(2) do |config|
     sshkeyadd inDepthh
     sshkeyadd Sriharsha-Singam
     sshkeyadd jazdao
+    sshkeyadd YuserahN
     sync;sync;sync
     cp -r /home/vagrant/.ssh /root/.
     {
        echo "Host *.onion"
        echo "  ProxyCommand nc -x localhost:9150 -X 5 %h %p"
     } > /root/.ssh/config
-    echo "0.6.5" > /boot/version.txt
+    echo "${$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box"):0:-4}" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
