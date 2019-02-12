@@ -54,8 +54,7 @@ Vagrant.configure(2) do |config|
     # blacklist virtualbox-guest-* from upgrades
     echo virtualbox-guest-dkms hold | dpkg --set-selections
     echo virtualbox-guest-utils hold | dpkg --set-selections
-    # install docker couchdb 2.2.0 & 2.3.0
-    sudo docker pull treehouses/couchdb:2.2.0
+    # install docker couchdb 2.3.0
     sudo docker pull treehouses/couchdb:2.3.0
     # install docker planet latest
     sudo docker pull treehouses/planet:latest
