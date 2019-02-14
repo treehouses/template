@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor
+    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor netcat-openbsd
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker-compose
@@ -54,14 +54,13 @@ Vagrant.configure(2) do |config|
     # blacklist virtualbox-guest-* from upgrades
     echo virtualbox-guest-dkms hold | dpkg --set-selections
     echo virtualbox-guest-utils hold | dpkg --set-selections
-    # install docker couchdb 2.2.0 & 2.3.0
-    sudo docker pull treehouses/couchdb:2.2.0
+    # install docker couchdb 2.3.0
     sudo docker pull treehouses/couchdb:2.3.0
     # install docker planet latest
-    sudo docker pull treehouses/planet:0.7.2
-    sudo docker pull treehouses/planet:db-init-0.7.2
-    sudo docker tag treehouses/planet:0.7.2 treehouses/planet:local
-    sudo docker tag treehouses/planet:db-init-0.7.2 treehouses/planet:db-init-local
+    sudo docker pull treehouses/planet:latest
+    sudo docker pull treehouses/planet:db-init
+    sudo docker tag treehouses/planet:latest treehouses/planet:local
+    sudo docker tag treehouses/planet:db-init treehouses/planet:db-init-local
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
@@ -101,13 +100,15 @@ Vagrant.configure(2) do |config|
     sshkeyadd inDepthh
     sshkeyadd Sriharsha-Singam
     sshkeyadd jazdao
+    sshkeyadd YuserahN
     sync;sync;sync
     cp -r /home/vagrant/.ssh /root/.
     {
        echo "Host *.onion"
-       echo "  ProxyCommand nc -x localhost:9150 -X 5 %h %p"
+       echo "  ProxyCommand nc -x localhost:9050 -X 5 %h %p"
     } > /root/.ssh/config
-    echo "0.6.5" > /boot/version.txt
+    v=$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box")
+    echo "${v:0:-4}" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
