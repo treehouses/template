@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "debian/contrib-buster64"
-  config.vm.box_version = "9.9.2"
+  config.vm.box_version = "9.99.2"
 
   config.vm.hostname = "template"
 
