@@ -2,8 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian/contrib-stretch64"
-  config.vm.box_version = "9.7.0"
+  config.vm.box = "debian/contrib-buster64"
+  config.vm.box_version = "9.9.2"
 
   config.vm.hostname = "template"
 
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     # adding backports
-    echo "deb http://ftp.de.debian.org/debian stretch-backports main non-free" | sudo tee -a /etc/apt/sources.list
+    echo "deb http://ftp.de.debian.org/debian buster-backports main non-free" | sudo tee -a /etc/apt/sources.list
     # blacklist grub-pc and linux-image-amd64 from upgrades
     echo grub-pc hold | dpkg --set-selections
     echo linux-image-amd64 hold | dpkg --set-selections
@@ -37,11 +37,12 @@ Vagrant.configure(2) do |config|
     sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
     # adding official docker/chrome/nodesource apt servers
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    #add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-    add-apt-repository "deb https://deb.nodesource.com/node_8.x stretch main"
+    add-apt-repository "deb https://deb.nodesource.com/node_8.x buster main"
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
