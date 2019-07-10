@@ -20,7 +20,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.push.define "atlas" do |push|
-    push.app = "ole/stretch64"
+    push.app = "treehouses/buster64"
   end
 
   # Prevent TTY Errors (copied from laravel/homestead: "homestead.rb" file)... By default this is "bash -l".
