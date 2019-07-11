@@ -33,7 +33,7 @@ Vagrant.configure(2) do |config|
     echo grub-pc hold | dpkg --set-selections
     echo linux-image-amd64 hold | dpkg --set-selections
     # install important packages
-    sudo apt update
+    sudo apt update --allow-releaseinfo-change
     sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
     # adding official docker/chrome/nodesource apt servers
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
