@@ -7,7 +7,7 @@ rm template.log
 
 vagrant up |& tee template.log
 vagrant halt
-vagrant package --output ole-0.7.10.box
+vagrant package --output treehouses-0.8.0.box
 ```
 
-upload the new box to https://app.vagrantup.com/ole/boxes/stretch64
+upload the new box to https://app.vagrantup.com/treehouses/boxes/buster64
