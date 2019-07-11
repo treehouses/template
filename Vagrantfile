@@ -107,8 +107,8 @@ Vagrant.configure(2) do |config|
        echo "Host *.onion"
        echo "  ProxyCommand /bin/nc.openbsd -x localhost:9050 -X 5 %h %p"
     } > /root/.ssh/config
-    v=$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box")
-    echo "${v:0:-4}" > /boot/version.txt
+    v=$(cat /vagrant/README.md | grep -Po "(?<=treehouses-)(.*)\.box")
+    echo "${v:0:-11}" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
     echo vagrant:tnargav | chpasswd
