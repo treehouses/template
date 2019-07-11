@@ -37,8 +37,7 @@ Vagrant.configure(2) do |config|
     sudo apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
     # adding official docker/chrome/nodesource apt servers
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-    #add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
     wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
     echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
