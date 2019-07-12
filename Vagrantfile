@@ -64,8 +64,6 @@ Vagrant.configure(2) do |config|
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
-    # install docker jekyll
-    sudo docker pull jekyll/jekyll
     # install CLI's
     sudo npm install -g @angular/cli @treehouses/cli
     # Add CORS to CouchDB so app has access to databases
