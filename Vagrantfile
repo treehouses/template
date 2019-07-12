@@ -64,8 +64,6 @@ Vagrant.configure(2) do |config|
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/planet.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
-    # install docker jekyll
-    sudo docker pull jekyll/jekyll
     # install CLI's
     sudo npm install -g @angular/cli @treehouses/cli
     # Add CORS to CouchDB so app has access to databases
@@ -107,7 +105,7 @@ Vagrant.configure(2) do |config|
        echo "Host *.onion"
        echo "  ProxyCommand /bin/nc.openbsd -x localhost:9050 -X 5 %h %p"
     } > /root/.ssh/config
-    v=$(cat /vagrant/README.md | grep -Po "(?<=ole-)(.*)\.box")
+    v=$(cat /vagrant/README.md | grep -Po "(?<=treehouses-)(.*)\.box")
     echo "${v:0:-4}" > /boot/version.txt
     sync;sync;sync
     # change password for vagrant user
