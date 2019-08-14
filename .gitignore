@@ -1,3 +1,4 @@
 .vagrant
 ole
 *.box
+template.log
