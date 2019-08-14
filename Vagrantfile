@@ -45,7 +45,7 @@ Vagrant.configure(2) do |config|
     # next round of packages
     sudo apt update
     sudo apt upgrade -y
-    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor netcat-openbsd
+    sudo apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor netcat-openbsd net-tools
     sudo usermod -aG docker $USER
     sudo usermod -aG docker vagrant
     # install docker-compose
