@@ -26,7 +26,7 @@ Vagrant.configure(2) do |config|
   # Prevent TTY Errors (copied from laravel/homestead: "homestead.rb" file)... By default this is "bash -l".
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
-  config.vm.provision "shell", inline: <<-SHELL
+  config.vm.provision "shell", env: {"GITHUB_KEY" => ENV['GITHUB_KEY']}, inline: <<-SHELL
     # adding backports
     echo "deb http://ftp.de.debian.org/debian buster-backports main non-free" | sudo tee -a /etc/apt/sources.list
     # blacklist grub-pc and linux-image-amd64 from upgrades
@@ -79,28 +79,12 @@ Vagrant.configure(2) do |config|
     chown vagrant:vagrant /vagrant_node_modules
     rm package.json
     # sshkeys
-    function sshkeyadd {
-      echo "# $1" >> /home/vagrant/.ssh/authorized_keys
-      curl https://github.com/"$1".keys >> /home/vagrant/.ssh/authorized_keys
-    }
-    sshkeyadd dogi
-    sshkeyadd i5o
-    sshkeyadd paulbert
-    sshkeyadd lmmrssa
-    sshkeyadd empeje
-    sshkeyadd sente
-    sshkeyadd singharpita
-    sshkeyadd svlesiv
-    sshkeyadd yuviii
-    sshkeyadd BhargaviNadendla
-    sshkeyadd leahphuong
-    sshkeyadd rrijal53
-    sshkeyadd inDepthh
-    sshkeyadd Sriharsha-Singam
-    sshkeyadd jazdao
-    sshkeyadd YuserahN
-    sync;sync;sync
-    cp -r /home/vagrant/.ssh /root/.
+    ln -sr /home/vagrant /home/pi
+    ls -al /home
+    echo $GITHUB_KEY
+    treehouses sshkey addgithubgroup treehouses support $GITHUB_KEY
+    rm /home/pi
+    # *.onion
     {
        echo "Host *.onion"
        echo "  ProxyCommand /bin/nc.openbsd -x localhost:9050 -X 5 %h %p"
