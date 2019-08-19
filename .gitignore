@@ -1,4 +1,5 @@
 .vagrant
 ole
 *.box
+key
 template.log
