@@ -24,6 +24,8 @@ Vagrant.configure(2) do |config|
     push.app = "treehouses/buster64"
   end
 
+  config.vm.post_up_message = "treehouses debian box. See https://github.com/treehouses/template/issues for help and bug reports"
+
   # Prevent TTY Errors (copied from laravel/homestead: "homestead.rb" file)... By default this is "bash -l".
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
