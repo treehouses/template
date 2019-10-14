@@ -99,6 +99,8 @@ Vagrant.configure(2) do |config|
     chown vagrant:vagrant /vagrant_node_modules
     rm package.json
     # sshkeys
+    mkdir -p /root/.ssh
+    chmod 700 .ssh
     ln -sr /home/vagrant /home/pi
     ls -al /home
     echo $GITHUB_KEY
