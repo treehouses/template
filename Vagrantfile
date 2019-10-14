@@ -101,11 +101,10 @@ Vagrant.configure(2) do |config|
     # sshkeys
     mkdir -p /root/.ssh
     chmod 700 .ssh
-    ln -sr /home/vagrant /home/pi
-    ls -al /home
     echo $GITHUB_KEY
     treehouses sshkey addgithubgroup treehouses support $GITHUB_KEY
-    rm /home/pi
+    sync; sync; sync
+    cat /root/.ssh/authorized_keys >> /home/vagrant/.ssh/authorized_keys
     # *.onion
     {
        echo "Host *.onion"
