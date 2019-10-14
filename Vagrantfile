@@ -35,6 +35,8 @@ Vagrant.configure(2) do |config|
     # blacklist grub-pc and linux-image-amd64 from upgrades
     echo grub-pc hold | dpkg --set-selections
     echo linux-image-amd64 hold | dpkg --set-selections
+    # temporary fix also for unwanted interactive config upgrading openssh-server
+    echo openssh-server hold | dpkg --set-selections
     # install important packages
     apt update --allow-releaseinfo-change
     apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common parted
