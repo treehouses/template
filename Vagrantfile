@@ -90,6 +90,10 @@ Vagrant.configure(2) do |config|
     mv terraform /usr/local/bin/.
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
+    sync; sync; sync
+    echo "$PWD"
+    ln -sr "/usr/lib/node_modules/@treehouses/cli/_treehouses" "/etc/bash_completion.d/_treehouses"
+    ls -al "/etc/bash_completion.d/_treehouses"
     # Add CORS to CouchDB so app has access to databases
     git clone https://github.com/pouchdb/add-cors-to-couchdb.git
     cd add-cors-to-couchdb
