@@ -88,6 +88,77 @@ Vagrant.configure(2) do |config|
     unzip terraform_0.12.10_linux_amd64.zip
     mkdir -p /usr/local/bin/
     mv terraform /usr/local/bin/.
+		# install balena 
+		ln -sr /vagrant /root/cli
+		ln -sr /vagrant /home/vagrant/cli
+		url="https://github.com/balena-os/balena-engine/releases/download/v17.12.0/balena-engine-v17.12.0-x86_64.tar.gz"
+		curl -sL "$url" | sudo tar xzv -C /usr/local/bin --strip-components=1
+		groupadd balena-engine
+		usermod -aG balena-engine vagrant
+	 	# prepare files for systemd
+		service_file=/etc/systemd/system/balena.service
+		socket_file=/etc/systemd/system/balena.socket
+
+		if [ -f "$service_file" ]
+		then
+		{
+			[Unit]
+			Description=Docker Application Container Engine
+			Documentation=https://docs.docker.com
+			After=network-online.target docker.socket firewalld.service
+			Wants=network-online.target
+			Requires=balena.socket
+
+			[Service]
+			Type=notify
+			# the default is not to use systemd for cgroups because the delegate issues still
+			# exists and systemd currently does not support the cgroup feature set required
+			# for containers run by docker
+			ExecStart=/usr/local/bin/balena-engine-daemon -H unix:///var/run/balena-engine.sock
+			ExecReload=/bin/kill -s HUP $MAINPID
+			LimitNOFILE=1048576
+			# Having non-zero Limit*s causes performance problems due to accounting overhead
+			# in the kernel. We recommend using cgroups to do container-local accounting.
+			LimitNPROC=infinity
+			LimitCORE=infinity
+			# Uncomment TasksMax if your systemd version supports it.
+			# Only systemd 226 and above support this version.
+			#TasksMax=infinity
+			TimeoutStartSec=0
+			# set delegate yes so that systemd does not reset the cgroups of docker containers
+			Delegate=yes
+			# kill only the docker process, not all processes in the cgroup
+			KillMode=process
+			# restart the docker process if it exits prematurely
+			Restart=on-failure
+			StartLimitBurst=3
+			StartLimitInterval=60s
+
+			[Install]
+			WantedBy=multi-user.target
+
+
+			} > "$service_file"
+		fi
+
+		if [ -f "$socket_file" ] 
+		then
+		{
+			[Unit]
+			Description=Docker Socket for the API
+			PartOf=balena.service
+
+			[Socket]
+			ListenStream=/var/run/balena-engine.sock
+			SocketMode=0660
+			SocketUser=root
+			SocketGroup=balena-engine
+
+			[Install]
+			WantedBy=sockets.target
+			} > "$socket_file"
+		fi
+		systemctl daemon-reload
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
     sync; sync; sync
