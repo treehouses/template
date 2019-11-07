@@ -148,7 +148,7 @@ Vagrant.configure(2) do |config|
       echo ""
       echo "[Install]"
       echo "WantedBy=sockets.target"
-        } > "$socket_file"
+    } > "$socket_file"
 
     systemctl daemon-reload
     # install CLI's
