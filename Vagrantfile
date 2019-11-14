@@ -137,7 +137,7 @@ Vagrant.configure(2) do |config|
       echo "Restart=on-failure"
       echo "StartLimitBurst=3"
       echo "StartLimitInterval=60s"
-            echo ""
+      echo ""
       echo "[Install]"
       echo "WantedBy=multi-user.target"
     } > "$service_file"
@@ -146,7 +146,7 @@ Vagrant.configure(2) do |config|
       echo "[Unit]"
       echo "Description=Docker Socket for the API"
       echo "PartOf=balena.service"
-            echo ""
+      echo ""
       echo "[Socket]"
       echo "ListenStream=/var/run/balena-engine.sock"
       echo "SocketMode=0660"
@@ -157,7 +157,7 @@ Vagrant.configure(2) do |config|
       echo "WantedBy=sockets.target"
     } > "$socket_file"
 
-    systemctl daemon-reload
+    treehouses container balena
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
     sync; sync; sync
