@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
     unzip terraform_0.12.10_linux_amd64.zip
     mkdir -p /usr/local/bin/
     mv terraform /usr/local/bin/.
-    # install balena 
+    # install balena
     url="https://github.com/balena-os/balena-engine/releases/download/v17.12.0/balena-engine-v17.12.0-x86_64.tar.gz"
     curl -sL "$url" | sudo tar xzv -C /usr/local/bin --strip-components=1
     groupadd balena-engine
@@ -151,13 +151,11 @@ Vagrant.configure(2) do |config|
       echo "ListenStream=/var/run/balena-engine.sock"
       echo "SocketMode=0660"
       echo "SocketUser=root"
-      echo "SocketGroup=balena-engine"    
+      echo "SocketGroup=balena-engine"
       echo ""
       echo "[Install]"
       echo "WantedBy=sockets.target"
     } > "$socket_file"
-
-    treehouses container balena
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
     sync; sync; sync
