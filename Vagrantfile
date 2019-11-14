@@ -93,6 +93,13 @@ Vagrant.configure(2) do |config|
     curl -sL "$url" | sudo tar xzv -C /usr/local/bin --strip-components=1
     groupadd balena-engine
     usermod -aG balena-engine vagrant
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd-ctr
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd-shim
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-daemon
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-proxy
+    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-runc
+    ln -sr /usr/bin/balena-engine /usr/bin/balena
     ln -sr /usr/local/bin/balena-engine /usr/local/bin/balena
      # prepare files for systemd
     service_file=/etc/systemd/system/balena.service
