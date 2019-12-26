@@ -91,20 +91,12 @@ Vagrant.configure(2) do |config|
     # install balena
     url="https://github.com/balena-os/balena-engine/releases/download/v17.12.0/balena-engine-v17.12.0-x86_64.tar.gz"
     curl -sL "$url" | sudo tar xzv -C /usr/local/bin --strip-components=1
+    ln -sr /usr/local/bin/balena-engine /usr/local/bin/balena
     groupadd balena-engine
     usermod -aG balena-engine vagrant
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd-ctr
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-containerd-shim
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-daemon
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-proxy
-    ln -sr /usr/bin/balena-engine /usr/bin/balena-engine-runc
-    ln -sr /usr/bin/balena-engine /usr/bin/balena
-    ln -sr /usr/local/bin/balena-engine /usr/local/bin/balena
-     # prepare files for systemd
-    service_file=/etc/systemd/system/balena.service
-    socket_file=/etc/systemd/system/balena.socket
-
+    usermod -aG balena-engine root
+    service_filocal/le=/etc/systemd/system/balena.service
+    socket_fillocal/e=/etc/systemd/system/balena.slocal/local/local/ocket
     {
       echo "[Unit]"
       echo "Description=Docker Application Container Engine"
@@ -141,7 +133,6 @@ Vagrant.configure(2) do |config|
       echo "[Install]"
       echo "WantedBy=multi-user.target"
     } > "$service_file"
-
     {
       echo "[Unit]"
       echo "Description=Docker Socket for the API"
@@ -156,6 +147,8 @@ Vagrant.configure(2) do |config|
       echo "[Install]"
       echo "WantedBy=sockets.target"
     } > "$socket_file"
+    rm -rf /var/lib/balena-engine
+    ln -sr /var/lib/docker /var/lib/balena-engine
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
     sync; sync; sync
