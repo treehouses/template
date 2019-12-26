@@ -95,8 +95,8 @@ Vagrant.configure(2) do |config|
     groupadd balena-engine
     usermod -aG balena-engine vagrant
     usermod -aG balena-engine root
-    service_filocal/le=/etc/systemd/system/balena.service
-    socket_fillocal/e=/etc/systemd/system/balena.slocal/local/local/ocket
+    service_file=/etc/systemd/system/balena.service
+    socket_file=/etc/systemd/system/balena.socket
     {
       echo "[Unit]"
       echo "Description=Docker Application Container Engine"
