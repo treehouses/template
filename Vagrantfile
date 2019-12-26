@@ -88,6 +88,67 @@ Vagrant.configure(2) do |config|
     unzip terraform_0.12.10_linux_amd64.zip
     mkdir -p /usr/local/bin/
     mv terraform /usr/local/bin/.
+    # install balena
+    url="https://github.com/balena-os/balena-engine/releases/download/v17.12.0/balena-engine-v17.12.0-x86_64.tar.gz"
+    curl -sL "$url" | sudo tar xzv -C /usr/local/bin --strip-components=1
+    ln -sr /usr/local/bin/balena-engine /usr/local/bin/balena
+    groupadd balena-engine
+    usermod -aG balena-engine vagrant
+    usermod -aG balena-engine root
+    service_file=/etc/systemd/system/balena.service
+    socket_file=/etc/systemd/system/balena.socket
+    {
+      echo "[Unit]"
+      echo "Description=Docker Application Container Engine"
+      echo "Documentation=https://docs.docker.com"
+      echo "After=network-online.target docker.socket firewalld.service"
+      echo "Wants=network-online.target"
+      echo "Requires=balena.socket"
+      echo ""
+      echo "[Service]"
+      echo "Type=notify"
+      echo "# the default is not to use systemd for cgroups because the delegate issues still"
+      echo "# exists and systemd currently does not support the cgroup feature set required"
+      echo "# for containers run by docker"
+      echo "ExecStart=/usr/local/bin/balena-engine-daemon -H unix:///var/run/balena-engine.sock"
+      echo "ExecReload=/bin/kill -s HUP $MAINPID"
+      echo "LimitNOFILE=1048576"
+      echo "# Having non-zero Limit*s causes performance problems due to accounting overhead"
+      echo "# in the kernel. We recommend using cgroups to do container-local accounting."
+      echo "LimitNPROC=infinity"
+      echo "LimitCORE=infinity"
+      echo "# Uncomment TasksMax if your systemd version supports it."
+      echo "# Only systemd 226 and above support this version."
+      echo "#TasksMax=infinity"
+      echo "TimeoutStartSec=0"
+      echo "# set delegate yes so that systemd does not reset the cgroups of docker containers"
+      echo "Delegate=yes"
+      echo "# kill only the docker process, not all processes in the cgroup"
+      echo "KillMode=process"
+      echo "# restart the docker process if it exits prematurely"
+      echo "Restart=on-failure"
+      echo "StartLimitBurst=3"
+      echo "StartLimitInterval=60s"
+      echo ""
+      echo "[Install]"
+      echo "WantedBy=multi-user.target"
+    } > "$service_file"
+    {
+      echo "[Unit]"
+      echo "Description=Docker Socket for the API"
+      echo "PartOf=balena.service"
+      echo ""
+      echo "[Socket]"
+      echo "ListenStream=/var/run/balena-engine.sock"
+      echo "SocketMode=0660"
+      echo "SocketUser=root"
+      echo "SocketGroup=balena-engine"
+      echo ""
+      echo "[Install]"
+      echo "WantedBy=sockets.target"
+    } > "$socket_file"
+    rm -rf /var/lib/balena-engine
+    ln -sr /var/lib/docker /var/lib/balena-engine
     # install CLI's
     npm install -g @angular/cli @treehouses/cli
     sync; sync; sync
