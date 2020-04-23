@@ -171,7 +171,7 @@ Vagrant.configure(2) do |config|
     mkdir -p /root/.ssh
     chmod 700 .ssh
     echo $GITHUB_KEY
-    treehouses sshkey addgithubgroup treehouses support $GITHUB_KEY
+    treehouses sshkey github addteam treehouses support $GITHUB_KEY
     sync; sync; sync
     cat /root/.ssh/authorized_keys >> /home/vagrant/.ssh/authorized_keys
     # *.onion
