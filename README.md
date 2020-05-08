@@ -12,7 +12,7 @@ rm template.log
 
 vagrant up |& tee template.log
 vagrant halt
-vagrant package --output treehouses-0.12.14.box
+vagrant package --output treehouses-0.12.16.box
 ```
 
 upload the new box to https://app.vagrantup.com/treehouses/boxes/buster64

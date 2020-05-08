@@ -167,7 +167,10 @@ Vagrant.configure(2) do |config|
     wget https://github.com/cli/cli/releases/download/v0.7.0/gh_0.7.0_linux_amd64.deb
     dpkg -i gh_0.7.0_linux_amd64.deb
     rm gh_0.7.0_linux_amd64.deb
-    # plant
+    # youtube-dl
+    curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+    chmod a+rx /usr/local/bin/youtube-dl
+    # planet
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
     npm run webdriver-set-version
