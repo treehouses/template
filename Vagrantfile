@@ -163,6 +163,10 @@ Vagrant.configure(2) do |config|
     # bats additional stuff
     npm install --unsafe-perm -g bats-support@0.3.0
     npm install --unsafe-perm -g bats-assert@2.0.0
+    # github cli
+    wget https://github.com/cli/cli/releases/download/v0.7.0/gh_0.7.0_linux_amd64.deb
+    dpkg -i gh_0.7.0_linux_amd64.deb
+    rm gh_0.7.0_linux_amd64.deb
     # plant
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
