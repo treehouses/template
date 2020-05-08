@@ -64,7 +64,7 @@ Vagrant.configure(2) do |config|
     # next round of packages
     apt update
     apt upgrade -y
-    apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor netcat-openbsd net-tools openvpn speedtest-cli nmap bc iotop ffmpeg dos2unix
+    apt install -y vim screen htop git autossh docker-ce google-chrome-stable nodejs wget unzip jq aptitude tor netcat-openbsd net-tools openvpn speedtest-cli nmap bc iotop ffmpeg dos2unix bats
     usermod -aG docker $USER
     usermod -aG docker vagrant
     # install docker-compose
@@ -160,6 +160,9 @@ Vagrant.configure(2) do |config|
     cd add-cors-to-couchdb
     npm install
     cd ..
+    # bats additional stuff
+    npm install --unsafe-perm -g bats-support@0.3.0
+    npm install --unsafe-perm -g bats-assert@2.0.0
     # plant
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/package.json
     npm i --unsafe-perm
