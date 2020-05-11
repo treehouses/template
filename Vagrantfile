@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "debian/contrib-buster64"
-  config.vm.box_version = "10.3.0"
+  config.vm.box_version = "10.4.0"
   config.disksize.size = '99GB'
 
   config.vm.hostname = "template"
