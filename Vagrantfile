@@ -84,8 +84,8 @@ Vagrant.configure(2) do |config|
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/volumes.yml
     wget https://raw.githubusercontent.com/open-learning-exchange/planet/master/docker/install.yml
     # install terraform
-    wget https://releases.hashicorp.com/terraform/0.12.10/terraform_0.12.10_linux_amd64.zip
-    unzip terraform_0.12.10_linux_amd64.zip
+    wget https://releases.hashicorp.com/terraform/0.12.25/terraform_0.12.25_linux_amd64.zip
+    unzip terraform_0.12.25_linux_amd64.zip
     mkdir -p /usr/local/bin/
     mv terraform /usr/local/bin/.
     # install balena
