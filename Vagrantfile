@@ -164,9 +164,9 @@ Vagrant.configure(2) do |config|
     npm install --unsafe-perm -g bats-support@0.3.0
     npm install --unsafe-perm -g bats-assert@2.0.0
     # github cli
-    wget https://github.com/cli/cli/releases/download/v0.7.0/gh_0.7.0_linux_amd64.deb
-    dpkg -i gh_0.7.0_linux_amd64.deb
-    rm gh_0.7.0_linux_amd64.deb
+    wget https://github.com/cli/cli/releases/download/v0.8.0/gh_0.8.0_linux_amd64.deb
+    dpkg -i gh_0.8.0_linux_amd64.deb
+    rm gh_0.8.0_linux_amd64.deb
     # youtube-dl
     curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
     chmod a+rx /usr/local/bin/youtube-dl
