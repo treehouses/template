@@ -22,10 +22,11 @@ jobs:
         sudo apt update && sudo apt install vagrant
         sudo apt install virtualbox
 
-    - name: print vagrant and virtualbox version
+    - name: print versions and install plugin
       run: |
         vagrant --version
         vboxmanage --version
+        vagrant plugin install vagrant-disksize
 
     - name: vagrant up
       run: |
