@@ -10,11 +10,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: |
-          echo hello
-          wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-          sudo apt update && sudo apt install vagrant
-          vagrant --version
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: install vagrant and virtualbox
+      run: |
+        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+        sudo apt update && sudo apt install vagrant
+        sudo apt install virtualbox
+
+    - name: print vagrant and virtualbox version
+      run: |
+        vagrant --version
+        vboxmanage --version
