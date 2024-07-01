@@ -7,10 +7,6 @@ on:
       - '152-build-on-github-actions'
   workflow_dispatch:
 
-env:
-  VAGRANT_CLOUD_TOKEN: ${{ secrets.VAGRANT_CLOUD_TOKEN }}
-  GITHUB_KEY: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,6 +28,9 @@ jobs:
         vagrant plugin install vagrant-disksize
 
     - name: vagrant up
+      env:
+        VAGRANT_CLOUD_TOKEN: ${{ secrets.VAGRANT_CLOUD_TOKEN }}
+        GITHUB_KEY: ${{ secrets.GITHUB_TOKEN }}
       run: vagrant up
 
     - name: vagrant halt
