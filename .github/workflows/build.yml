@@ -31,18 +31,8 @@ jobs:
         vboxmanage --version
         vagrant plugin install vagrant-disksize
 
-    - name: authenticate with vagrant cloud
-      run: |
-        vagrant cloud auth login --check
-        echo ""
-        vagrant cloud auth login --token $VAGRANT_CLOUD_TOKEN
-        echo ""
-        vagrant cloud auth login --check
-
     - name: vagrant up
-      run: |
-        vagrant up
+      run: vagrant up
 
     - name: vagrant halt
-      run: |
-        vagrant halt
+      run: vagrant halt
