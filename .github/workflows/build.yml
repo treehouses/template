@@ -14,3 +14,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           echo hello
+          vagrant --version
