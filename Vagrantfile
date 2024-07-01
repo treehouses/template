@@ -13,16 +13,13 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "template"
+    vb.memory = "3333"
+    vb.cpus = "3"
   end
 
-  config.vm.provider "virtualbox" do |vb|
-     vb.memory = "3333"
-     vb.cpus = "3"
-  end
-
-  config.push.define "atlas" do |push|
-    push.app = "treehouses/buster64"
-  end
+#  config.push.define "atlas" do |push|
+#    push.app = "treehouses/buster64"
+#  end
 
   config.vm.post_up_message = "treehouses debian box - see https://github.com/treehouses/template/issues for help and bug reports"
 
