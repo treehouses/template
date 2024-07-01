@@ -26,3 +26,7 @@ jobs:
       run: |
         vagrant --version
         vboxmanage --version
+
+    - name: vagrant up
+      run: |
+        vagrant up
