@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'master'
+      - '152-build-on-github-actions'
   workflow_dispatch:
 
 jobs:
