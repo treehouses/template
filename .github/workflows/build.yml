@@ -21,7 +21,8 @@ jobs:
         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
         sudo openssl rand -out /var/lib/shim-signed/mok/.rnd -hex 256
         sudo apt update
-        cat /sys/firmware/efi/efivars
+        sudo apt install linux-headers-$(uname -r)
+        #cat /sys/firmware/efi/efivars
         [ -d /sys/firmware/efi ] && echo "EFI boot" || echo "Legacy boot"
         sudo apt install vagrant virtualbox virtualbox-guest-additions-iso
 
