@@ -1,10 +1,7 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure(2) do |config|
-  config.vm.box = "debian/contrib-buster64"
-  config.vm.box_version = "10.4.0"
-  config.disksize.size = '99GB'
+  config.vm.box = "debian/bookworm64"
+  config.vm.box_version = "12.20240212.1"
+  #config.disksize.size = '99GB'
 
   config.vm.hostname = "template"
 
@@ -13,13 +10,16 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "template"
-    vb.memory = "3333"
-    vb.cpus = "3"
   end
 
-#  config.push.define "atlas" do |push|
-#    push.app = "treehouses/buster64"
-#  end
+  config.vm.provider "virtualbox" do |vb|
+     vb.memory = "3333"
+     vb.cpus = "3"
+  end
+
+  #config.push.define "atlas" do |push|
+  #  push.app = "treehouses/bookworm64"
+  #end
 
   config.vm.post_up_message = "treehouses debian box - see https://github.com/treehouses/template/issues for help and bug reports"
 
