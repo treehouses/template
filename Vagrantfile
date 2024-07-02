@@ -2,6 +2,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "debian/bookworm64"
   config.vm.box_version = "12.20240212.1"
   #config.disksize.size = '99GB'
+  config.disksize.size = '33GB'
 
   config.vm.hostname = "template"
 
