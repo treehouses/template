@@ -37,23 +37,25 @@ Vagrant.configure(2) do |config|
     # install important packages
     apt update --allow-releaseinfo-change
     apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common parted
-
-    echo -----------------------------------------------
-    echo -----------------------------------------------
-
     # remove swap partition
     swapoff -a
+    echo 0
     sed -i -e '11,2d;12d' /etc/fstab
+    echo 1
     printf "d\n5\nd\n2\nw\n" | fdisk /dev/sda
     # add swap by file
+    echo 2
     fallocate -l 1g /swapfile
     chmod 600 /swapfile
     mkswap /swapfile
     swapon /swapfile
     echo "/swapfile    none    swap    sw    0   0" >> /etc/fstab
     # resize root
+    echo 3
     printf "R\nWyes\nQ" | cfdisk /dev/sda
+    echo 4
     partprobe
+    echo 5
     resize2fs /dev/sda1
     # adding official docker/chrome/nodesource apt servers
     curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
