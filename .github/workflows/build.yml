@@ -28,6 +28,7 @@ jobs:
         vagrant --version
         vboxmanage --version
         vagrant plugin install vagrant-disksize
+        df -h
 
     - name: vagrant up
       env:
