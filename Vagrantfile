@@ -40,8 +40,9 @@ Vagrant.configure(2) do |config|
     apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common parted
     # remove swap partition
     swapoff -a
-    echo 0
+    cat /etc/fstab
     sed -i -e '11,2d;12d' /etc/fstab
+    cat /etc/fstab
     echo 1
     printf "d\n5\nd\n2\nw\n" | fdisk /dev/sda
     # add swap by file
