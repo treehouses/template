@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", env: {"GITHUB_KEY" => ENV['GITHUB_KEY']}, inline: <<-SHELL
     # adding backports
-    echo "deb http://ftp.de.debian.org/debian buster-backports main non-free" | sudo tee -a /etc/apt/sources.list
+    #echo "deb http://ftp.de.debian.org/debian bookworm-backports main non-free" | sudo tee -a /etc/apt/sources.list
     # blacklist grub-pc and linux-image-amd64 from upgrades
     echo grub-pc hold | dpkg --set-selections
     echo linux-image-amd64 hold | dpkg --set-selections
@@ -37,6 +37,10 @@ Vagrant.configure(2) do |config|
     # install important packages
     apt update --allow-releaseinfo-change
     apt install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common parted
+
+    echo -----------------------------------------------
+    echo -----------------------------------------------
+
     # remove swap partition
     swapoff -a
     sed -i -e '11,2d;12d' /etc/fstab
