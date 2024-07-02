@@ -20,7 +20,8 @@ jobs:
         wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
         sudo openssl rand -out /var/lib/shim-signed/mok/.rnd -hex 256
-        apt update && sudo apt install vagrant virtualbox
+        sudo apt update
+        sudo apt install vagrant virtualbox
 
     - name: print versions and install plugin
       run: |
