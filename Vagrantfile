@@ -2,7 +2,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "debian/bookworm64"
   config.vm.box_version = "12.20240503.1"
   #config.disksize.size = '99GB'
-  config.disksize.size = '33GB'
+  config.disksize.size = '22GB'
 
   config.vm.hostname = "template"
 
@@ -11,9 +11,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "template"
-  end
-
-  config.vm.provider "virtualbox" do |vb|
      vb.memory = "3333"
      vb.cpus = "3"
   end
